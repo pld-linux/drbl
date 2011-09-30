@@ -5,12 +5,12 @@
 # - more FHS thing (config to /etc)
 Summary:	DRBL (Diskless Remote Boot in Linux) package
 Name:		drbl
-Version:	1.9.9
-Release:	21.1
+Version:	1.10.31
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://downloads.sourceforge.net/drbl/%{name}-%{version}-21.tar.bz2
-# Source0-md5:	97b6393f87581a4e64a34690fdf8f40f
+Source0:	http://downloads.sourceforge.net/drbl/drbl_stable/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	8e5dce6822336b7d1a6672849de84827
 URL:		http://www.drbl.org/
 BuildRequires:	bash
 BuildRequires:	sed >= 4.0
@@ -26,7 +26,7 @@ includes Clonezilla, a partition and disk cloning utility similar to
 Symantec Ghost(TM) or True Image(TM).
 
 %prep
-%setup -q -n %{name}-%{version}-21
+%setup -q -n %{name}-%{version}
 
 grep -rl /opt/drbl/ . | xargs sed -i -e 's,/opt/drbl,%{_libdir}/%{name},g'
 
