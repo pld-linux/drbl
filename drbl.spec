@@ -5,15 +5,14 @@
 # - more FHS thing (config to /etc)
 Summary:	DRBL (Diskless Remote Boot in Linux) package
 Name:		drbl
-Version:	1.10.31
-Release:	1
+Version:	2.1.33
+Release:	0.1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://downloads.sourceforge.net/drbl/drbl_stable/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	8e5dce6822336b7d1a6672849de84827
+Source0:	http://free.nchc.org.tw/drbl-core/src/unstable/%{name}-%{version}.tar.bz2
+# Source0-md5:	ab5d805195c72b7638019a1259b682b8
 URL:		http://www.drbl.org/
 BuildRequires:	bash
-BuildRequires:	sed >= 4.0
 Requires:	findutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,15 +27,12 @@ Symantec Ghost(TM) or True Image(TM).
 %prep
 %setup -q -n %{name}-%{version}
 
-grep -rl /opt/drbl/ . | xargs sed -i -e 's,/opt/drbl,%{_libdir}/%{name},g'
-
 %build
 %{__make} all
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
-	maindir=%{_libdir}/%{name} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -44,15 +40,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%defattr(-,root,root,-)
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/setup
-%{_libdir}/%{name}/conf
-%{_libdir}/%{name}/lang
-%{_libdir}/%{name}/pkg
-%{_libdir}/%{name}/pki
-%{_libdir}/%{name}/image
-%{_libdir}/%{name}/doc
-%{_libdir}/%{name}/sbin
-%{_libdir}/%{name}/bin
+%dir /etc/drbl
+/etc/drbl/*
+%attr(755,root,root) /usr/sbin/*
+%attr(755,root,root) /usr/bin/*
 %{_datadir}/gdm/themes/drbl-gdm
+%defattr(-,root,root,-)
+%{_datadir}/drbl
