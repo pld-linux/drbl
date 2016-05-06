@@ -26,17 +26,16 @@ includes Clonezilla, a partition and disk cloning utility similar to
 Symantec Ghost(TM) or True Image(TM).
 
 %package gdm-theme
-Summary:        GDM theme for DRBL
-Group:          Themes
-Requires:	%{name}
+Summary:	GDM theme for DRBL
+Group:		Themes
+Requires:	%{name} = %{version}-%{release}
 Requires:	gdm-theme
-BuildArch:	noarch
 
 %description gdm-theme
 GDM theme for DRBL
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 grep -rl /opt/drbl/ . | xargs sed -i -e 's,/opt/drbl,%{_libdir}/%{name},g'
 
